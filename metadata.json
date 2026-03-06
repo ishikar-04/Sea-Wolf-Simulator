@@ -1,0 +1,5 @@
+{
+  "name": "seawolf simulator",
+  "description": "A high-fidelity simulation of the Ocean Cleanup optimization assessment. Players manage a multi-stage microbial treatment process across three sites under time pressure.",
+  "requestFramePermissions": []
+}
