@@ -42,6 +42,7 @@ export interface Site {
 
 export enum GameStage {
   INTRO = 'INTRO',
+  TUTORIAL = 'TUTORIAL',
   PROFILING = 'PROFILING',
   CATEGORIZATION = 'CATEGORIZATION', // The Sieve
   PROSPECTING = 'PROSPECTING', // The Choice

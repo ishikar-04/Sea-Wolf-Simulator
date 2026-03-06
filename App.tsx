@@ -5,7 +5,7 @@ import Stage1Profiling from './components/Stage1Profiling';
 import Stage2Sieve from './components/Stage2Sieve';
 import Stage3Prospecting from './components/Stage3Prospecting';
 import Stage4Treatment from './components/Stage4Treatment';
-import { Clock, Waves, Award, Play } from 'lucide-react';
+import { Clock, Waves, Award, Play, BookOpen } from 'lucide-react';
 
 const App: React.FC = () => {
   const [sites] = useState<Site[]>(generateSites());
@@ -43,6 +43,10 @@ const App: React.FC = () => {
   };
 
   const startGame = () => {
+    setStage(GameStage.TUTORIAL);
+  };
+
+  const startMission = () => {
     setIsActive(true);
     setStage(GameStage.PROFILING);
   };
@@ -99,7 +103,7 @@ const App: React.FC = () => {
                 </div>
             </div>
 
-            {stage !== GameStage.INTRO && stage !== GameStage.GAME_OVER && (
+            {stage !== GameStage.INTRO && stage !== GameStage.TUTORIAL && stage !== GameStage.GAME_OVER && (
                 <div className="flex items-center gap-8">
                     <div className="text-center">
                         <span className="text-xs text-slate-500 uppercase block">Current Site</span>
@@ -141,6 +145,64 @@ const App: React.FC = () => {
                     <Play className="w-6 h-6 fill-current" />
                     Initialize Simulation
                 </button>
+             </div>
+        )}
+
+        {stage === GameStage.TUTORIAL && (
+             <div className="max-w-3xl mx-auto bg-slate-900 border border-slate-700 rounded-xl p-8 animate-in fade-in duration-500">
+                <div className="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6">
+                    <div className="bg-teal-500/10 p-3 rounded-xl">
+                        <BookOpen className="w-8 h-8 text-teal-400" />
+                    </div>
+                    <div>
+                        <h2 className="text-3xl font-bold text-white">Mission Briefing</h2>
+                        <p className="text-slate-400">Review the protocol before the timer begins.</p>
+                    </div>
+                </div>
+
+                <div className="space-y-6 text-slate-300 mb-10">
+                    <div className="bg-slate-950 p-6 rounded-lg border border-slate-800">
+                        <h3 className="text-xl font-bold text-teal-400 mb-2">Your Objective</h3>
+                        <p>You are tasked with treating 3 distinct oceanic sites using engineered microbes. Each site has specific environmental requirements for Temperature, Salinity, and pH, along with desirable and undesirable genetic traits.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-slate-800/50 p-5 rounded-lg border border-slate-700/50">
+                            <h4 className="font-bold text-white mb-1">1. Profiling</h4>
+                            <p className="text-sm">Analyze the target site's environmental constraints and trait requirements.</p>
+                        </div>
+                        <div className="bg-slate-800/50 p-5 rounded-lg border border-slate-700/50">
+                            <h4 className="font-bold text-white mb-1">2. Categorization</h4>
+                            <p className="text-sm">Filter a raw sample of microbes. Keep the ones you need, and stash others for future sites.</p>
+                        </div>
+                        <div className="bg-slate-800/50 p-5 rounded-lg border border-slate-700/50">
+                            <h4 className="font-bold text-white mb-1">3. Prospecting</h4>
+                            <p className="text-sm">Review your curated pool and select the best candidates for the current site.</p>
+                        </div>
+                        <div className="bg-slate-800/50 p-5 rounded-lg border border-slate-700/50">
+                            <h4 className="font-bold text-white mb-1">4. Treatment</h4>
+                            <p className="text-sm">Deploy the microbes. Your score is based on how well the average stats of your selected microbes match the site's needs.</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-amber-900/20 border border-amber-900/50 p-4 rounded-lg flex items-start gap-4">
+                        <Clock className="w-6 h-6 text-amber-500 shrink-0 mt-1" />
+                        <div>
+                            <h4 className="font-bold text-amber-500">Time is of the essence</h4>
+                            <p className="text-sm text-amber-200/70">Once you begin, you will have exactly 30 minutes to complete all 3 sites. The timer does not pause between stages.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex justify-end">
+                    <button 
+                        onClick={startMission}
+                        className="group bg-teal-500 hover:bg-teal-400 text-slate-900 px-8 py-4 rounded-xl font-bold text-xl flex items-center gap-3 transition-all shadow-lg shadow-teal-500/20 hover:scale-105"
+                    >
+                        <Play className="w-6 h-6 fill-current" />
+                        Begin Mission
+                    </button>
+                </div>
              </div>
         )}
 
