@@ -270,6 +270,7 @@ const App: React.FC = () => {
         )}
 
       </main>
+      <Analytics />
     </div>
   );
 };
